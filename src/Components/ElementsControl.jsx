@@ -7,6 +7,7 @@ import {
   Close as CloseIcon,
   FilterCenterFocus as FilterCenterFocusIcon,
   HideSourceOutlined as HideSourceOutlinedIcon,
+  ViewInArOutlined as ViewInArOutlinedIcon,
   VisibilityOutlined as VisibilityOutlinedIcon,
 } from '@mui/icons-material'
 
@@ -20,6 +21,8 @@ import {
 export default function ElementsControl({deselectItems}) {
   const viewer = useStore((state) => state.viewer)
   const selectedElement = useStore((state) => state.selectedElement)
+  const isViewCubeVisible = useStore((state) => state.isViewCubeVisible)
+  const toggleIsViewCubeVisible = useStore((state) => state.toggleIsViewCubeVisible)
   const [isIsolate, setIsIsolate] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
 
@@ -41,6 +44,17 @@ export default function ElementsControl({deselectItems}) {
     >
       <ButtonGroup orientation='horizontal' variant='controls'>
         {!isIsolate && <CutPlaneMenu/>}
+
+        {!isIsolate &&
+         <TooltipIconButton
+           title='View cube'
+           onClick={toggleIsViewCubeVisible}
+           icon={<ViewInArOutlinedIcon className='icon-share'/>}
+           placement='top'
+           variant='control'
+           selected={isViewCubeVisible}
+           dataTestId='control-button-view-cube'
+         />}
 
         {isSelected() && selectedElement !== null &&
          <TooltipIconButton
