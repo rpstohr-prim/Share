@@ -103,4 +103,21 @@ describe('ElementsControl', () => {
     fireEvent.click(hideButton)
     expect(viewer.isolator.hideSelectedElements).toHaveBeenCalled()
   })
+
+  it('should toggle ViewCube visibility when the View cube button is clicked', async () => {
+    const {result} = renderHook(() => useStore((state) => state))
+    await act(() => {
+      result.current.setIsViewCubeVisible(false)
+    })
+    const {getByTitle} = render(
+      <ShareMock initialEntries={['/v/p/index.ifc#p:x']}>
+        <ElementsControl deselectItems={deselectItems}/>
+      </ShareMock>,
+    )
+    const viewCubeButton = getByTitle('View cube')
+    fireEvent.click(viewCubeButton)
+    expect(result.current.isViewCubeVisible).toBe(true)
+    fireEvent.click(viewCubeButton)
+    expect(result.current.isViewCubeVisible).toBe(false)
+  })
 })

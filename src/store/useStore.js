@@ -17,6 +17,7 @@ import createSideDrawerSlice from './SideDrawerSlice'
 import createUIEnabledSlice from './UIEnabledSlice'
 import createUISlice from './UISlice'
 import createVersionsSlice from './VersionsSlice'
+import createViewCubeSlice from './ViewCubeSlice'
 
 
 const useStore = create((set, get) => ({
@@ -38,6 +39,7 @@ const useStore = create((set, get) => ({
   ...createUIEnabledSlice(set, get),
   ...createUISlice(set, get),
   ...createVersionsSlice(set, get),
+  ...createViewCubeSlice(set, get),
 }))
 
 export default useStore

@@ -48,6 +48,7 @@ export default function CadView({
   // Begin useStore //
 
   const accessToken = useStore((state) => state.accessToken)
+  const isViewCubeVisible = useStore((state) => state.isViewCubeVisible)
   const hasGitHubIdentity = useStore((state) => state.hasGithubIdentity)
   const customViewSettings = useStore((state) => state.customViewSettings)
   const elementTypesMap = useStore((state) => state.elementTypesMap)
@@ -723,7 +724,7 @@ export default function CadView({
   return (
     <Box sx={{...absTop, left: 0, width: '100vw', height: isMobile ? `${vh}px` : '100vh', m: 0, p: 0}}>
       {<ViewerContainer/>}
-      {viewer && <ViewCube/>}
+      {viewer && isViewCubeVisible && <ViewCube/>}
       {viewer && (
         <RootLandscape
           pathPrefix={pathPrefix}
